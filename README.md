@@ -22,7 +22,14 @@ Certifique-se de que você tem as seguintes ferramentas instaladas:
 * [Make](https://www.gnu.org/software/make/)
 * [grpcurl](https://github.com/fullstorydev/grpcurl) (para testar o gRPC)
 
-### 2. Banco de Dados
+### 2. Endpoints da Aplicação
+
+A aplicação expõe os seguintes serviços nas respectivas portas:
+
+* **Serviços HTTP (REST e GraphQL):** Porta **`8080`**
+* **Serviço gRPC:** Porta **`50051`**
+
+### 3. Banco de Dados
 
 O banco de dados é provisionado via Docker e as migrações são aplicadas na subida. Para iniciar, execute:
 
@@ -32,7 +39,7 @@ docker compose build && docker compose up -d
 
 Isso irá subir o banco e preparar o ambiente para a aplicação.
 
-### 3. Protobuf / gRPC
+### 4. Protobuf / gRPC
 
 Os arquivos `.proto` estão localizados na pasta `pkg/proto`.
 
