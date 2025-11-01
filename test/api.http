@@ -1,0 +1,40 @@
+### Create Order
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "customer_id": "customer-123",
+  "amount": 99.99
+}
+
+### List Orders
+GET http://localhost:8080/orders
+
+### Get Order by ID
+//@order_id = 8ee2d2ab-0ae1-433a-bab6-ca8deb433e76
+GET http://localhost:8080/orders/{{order_id}}
+
+### GraphQL - List Orders
+POST http://localhost:8080/graphql
+Content-Type: application/json
+
+{
+  "query": "query { orders { id customer_id amount status created_at updated_at } }"
+}
+
+### GraphQL - Create Order
+POST http://localhost:8080/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation { createOrder(customer_id: \"customer-456\", amount: 149.99) { id customer_id amount status created_at updated_at } }"
+}
+
+### GraphQL - Get Order
+@order_id = 8ee2d2ab-0ae1-433a-bab6-ca8deb433e76
+POST http://localhost:8080/graphql
+Content-Type: application/json
+
+{
+  "query": "query { order(id: \"{{order_id}}\") { id customer_id amount status created_at updated_at } }"
+}

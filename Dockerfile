@@ -1,0 +1,20 @@
+
+FROM golang:1.25-alpine AS builder
+
+WORKDIR /app
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+
+RUN apk add --no-cache git make protobuf protoc
+RUN make install-tools && make generate && make build
+
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+
+WORKDIR /root/
+COPY --from=builder /app/main .
+EXPOSE 8080 50051
+ENTRYPOINT ["/root/main"]
